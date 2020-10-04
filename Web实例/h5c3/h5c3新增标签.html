@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        header,
+        nav,
+        article,
+        footer {
+            height: 120px;
+            background-color: gray;
+            border-radius: 15px;
+            width: 800px;
+            margin: 15px auto;
+        }
+
+        section {
+            width: 500px;
+            height: 300px;
+            background-color: skyblue;
+        }
+
+        video {
+            width: 100%;
+        }
+
+        /* css新增选择器 1.属性选择器 2.结构伪类选择器 3.伪元素选择器 */
+        /* 1. 属性选择器*/
+        input[value] {
+            /* 选择input具有value属性 */
+            color: blue;
+        }
+
+        input[value=password] {
+            /* 选择input属性value等于password的 （重点）*/
+            color: pink;
+        }
+
+        /* 选择att属性值val开头的某些元素 E[att^]=val */
+        /* 选择att属性值val结尾的某些元素 E[att$]=val */
+        /* 选择att属性含有val值的某些元素 E[att*]=val （重点）*/
+
+        /* 2.结构伪类选择器 主要根据文档结构来选择元素*/
+        .ul :first-child {
+            /* 选择ul里的第一个子元素 */
+            background-color: pink;
+        }
+
+        .ul :last-child {
+            /* 选择ul里的最后一个子元素 */
+            background-color: blue;
+        }
+
+        .ul :nth-child(4) {
+            /* n可以是数字 公式 关键字（even偶数 odd奇数） */
+            /* 选择ul里的第四个子元素 （重点）*/
+            background-color: red;
+        }
+
+        ol :nth-child(n) {
+            /* 从0开始 每次加1 往后面计算 里面必须是n不能是其他字 */
+            /* n+5从第五个开始 2n偶数 2n-1奇数 -n+5前五个 */
+            background-color: pink;
+        }
+
+        /* E:first-of-type 指定类型E的第一个 */
+        /* E:last-of-type 指定类型E的最后一个 */
+        /* E:nth-of-type(n) 指定类型E的第n个 */
+
+        /* 3.伪元素选择器 可利用css创建新标签元素，不需要html标签，简化了html结构 新创建的这个元素在文档树中不存在 所以叫作伪元素 权重与标签选择器一样为1*/
+        /* ::before 在元素内部的前面插入内容 ::after在元素内部的后面插入内容 befor和after必须有content属性 伪元素属于下一级元素*/
+        .weiyuansu::before {
+            /* content必须写 */
+            display: inline-block;
+            content: "我";
+            width: 30px;
+            height: 40px;
+            background-color: purple;
+        }
+
+        .weiyuansu::after {
+            content: "你";
+        }
+
+        /* c3盒子模型 */
+        /* 可通过box-sizing来指定盒模型 有两个值content-bos和border-box */
+        /* box-sizing:content-box 盒子大小为width + padding + border（以前默认的） */
+        /* box-sizing:border-box 盒子大小为width  可写在最开头的*声明中 */
+
+        /* filter 滤镜 将模糊或颜色偏移特性赋予图像 */
+        /* calc 声明css属性时进行一些计算 width:calc(100% - 80px); 可以进行+ - * /等做法 */
+
+        /* transition过度 （重点） 经常与hover一起使用 */
+        /* transition: 
+            要过度的属性 想要变化的css属性，高度宽度内外边距等，所有属性可写all 
+            花费时间 单位是秒（必须写） 比如0.5s
+            运动曲线 默认ease逐渐慢下来（可以省略） linear匀速 ease-in加速 ease-out减速 ease-in-out先减速后加速
+            何时开始 单位是秒（必须写单位） 可以设置延迟触发时间 默认是0s（可以忽略） */
+        .trans {
+            width: 200px;
+            height: 100px;
+            background-color: #F78fff;
+            /* 如果要写多个属性可用逗号进行分割 也可以换成all*/
+            transition: all 1s ease 0s;
+        }
+
+        .trans:hover {
+            width: 400px;
+            height: 200px;
+            background-color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div>h5新增标签</div>
+    <header>头部标签</header>
+    <nav>导航栏标签</nav>
+    <article>内容标签</article>
+    <section>某个区域</section>
+    <aside>侧边栏</aside>
+    <footer>尾部标签</footer>
+    <!--视频标签 video 支持三种格式，尽量使用mp4格式 -->
+    <!-- autoplay是否自动播放 谷歌浏览器禁止自动播放，但添加muted:muted也可自动播放 controls是否显示控件(一般直接去掉) 
+        loop无限循环 poster加载等待的画面图片-->
+    <video src="media/mi.mp4" autoplay="autoplay" controls="controls" loop="loop" poster="media/mi9.jpg"></video>
+    <!--音频标签 audio支持三种格式的音频。尽量使用mp3格式 -->
+    <!-- autoplay是否自动播放 谷歌浏览器禁止自动播放 controls播放控件 loop循环 -->
+    <audio src="media/music.mp3" "autoplay=" autoplay" controls="controls"></audio>
+    <!-- input新增类型 email url data time month week number tel search color -->
+    <form action="">
+        <ul>
+            <!-- 验证时必须添加form表单域 -->
+            <li>邮箱：<input type="email" name="" id=""></li>
+            <li>网址：<input type="url" name="" id=""></li>
+            <li>日期：<input type="date" name="" id=""></li>
+            <li>时间：<input type="time" name="" id=""></li>
+            <li>*数量：<input type="number" name="" id=""></li>
+            <li>*手机号码：<input type="tel" name="" id=""></li>
+            <li*>搜索：<input type="search" name="" id=""></li>
+                <li>颜色：<input type="color" name="" id=""></li>
+                <!-- 当点击提交按钮时，验证表单 -->
+                <li><input type="submit" value=""></li>
+        </ul>
+    </form>
+    <!-- form新增表单属性  required="required"必须填写 placeholder提示文本 autofocus打开网页自动聚焦 
+        autocomplete="on"/"off"纪录历史输入前提必须有name属性 multiple="multiple"文件可多选-->
+    <form action="">
+        <input type="search" name="search" id="" required="required" placeholder="提示文本" autofocus="autofocus"
+            autocomplete="on">
+        <input type="file" name="" id="" multiple="multiple">
+        <input type="submit" value="">
+    </form>
+
+    <div>css3新增标签</div>
+
+    <!-- 利用属性选择器可以不借助于类或id选择器 -->
+    <input type="text" value="请输入用户名">
+    <input type="text" value="password">
+    <input type="text" value="password">
+    <!-- 利用结构伪类选择器选择 -->
+    <ul class="ul">
+        <li>我是第一个</li>
+        <li>我是第二个</li>
+        <li>我是第三个</li>
+        <li>我是第四个</li>
+        <li>我是第五个</li>
+        <li>我是第六个</li>
+        <li>我是第七个</li>
+        <li>我是第八个</li>
+    </ul>
+    <ol>
+        <li>我是第一个</li>
+        <li>我是第二个</li>
+        <li>我是第三个</li>
+        <li>我是第四个</li>
+        <li>我是第五个</li>
+        <li>我是第六个</li>
+    </ol>
+    <!-- 利用伪元素选择器添加元素 -->
+    <div class="weiyuansu" style="width:200px; height:200px; background-color:yellow;">
+        伪元素选择器
+    </div>
+
+    <!-- 过渡 -->
+    <div class="trans">
+
+    </div>
+</body>
+
+</html>
