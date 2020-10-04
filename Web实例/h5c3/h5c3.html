@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>h5c3实例</title>
+    <style>
+        /* 内部样式表：在html界面内部写样式，全部放于style标签里，练习时常用 */
+        /* 行内样式表：在标签内部的style属性中设定css字样，如<p style="color: pink;"></p>，一般用在修改简单样式 */
+        /* 外部样式表：样式单独写在CSS文件中（只有样式没有标签），将CSS文件引入到HTML页面中，通过<link>引入，适用于样式比较多的情况 
+            <link rel="stylesheet" href="css文件路径">
+        */
+        /* 1.标签选择器，选择p标签 */
+        p {
+            color: green;
+            /* 三种方法 预定义的颜色值green 十六进制#00FF00 RGB代码rgb(0,255,0)或rgb(0,100%,0) */
+            font-family: "SimSun", Arial, Helvetica;
+            /* 按顺序显示，前面的一个没有就选择后面的 */
+            font-weight: 700;
+            /* 字体粗细 提倡使用数字 默认normal=400 bold=700 */
+            font-size: 24px;
+            /* 字体大小 px像素 谷歌浏览器默认16px */
+            font-style: italic;
+            /* 字体风格 italic斜体 默认normal */
+            text-align: center;
+            /* 内部字体位置 默认left左对齐 center居中对齐 */
+            text-decoration: line-through;
+            /* 装饰文本 默认none无 underline下划线 overline上划线 line-through删除线（不常用） 可用来删除链接的下划线*/
+            line-height: 40px;
+            /* 行间距=上间距+下间距+文本间距*/
+        }
+
+        /* 2.类选择器，选择class为red的元素 */
+        .red {
+            color: red;
+            font-size: 30px;
+        }
+
+        .color {
+            color: red;
+        }
+
+        .font35 {
+            font-size: 45px;
+        }
+
+        /* 3.id选择器，选择id为pink的元素 */
+        #pink {
+            color: pink;
+            font-size: large;
+        }
+
+        /*         
+        * {
+            color: blue;
+        } 4.通配符选择器，选择所有标签 
+        */
+
+        /* 1_后代选择器 选择ul内部的li标签 */
+        .ul li {
+            color: blue;
+            /* 复合属性：简写 节约代码（不能颠倒顺序） font-size和font-family不可省略*/
+            /* font: font-style font-weight font-size/line-height font-family ，其中25px/2是行间距是行高的2倍*/
+            font: italic 700 25px/2 "Microsoft YaHei";
+            text-indent: 2em;
+            /* 首行缩进 em是相对单位相当于当前一个文字大小 也可用px像素 %百分号*/
+        }
+
+        /* 2_子元素选择器 只选择最近的一级子元素*/
+        .dl>dd {
+            color: purple;
+            font: 25px "SimSun"
+        }
+
+        /* 3_并集选择器 用逗号分隔 集体声明 一般竖着写*/
+        .bingji div,
+        .bingji span {
+            color: greenyellow;
+            font: 35px "SimSun"
+        }
+
+        /* 4_伪类选择器 用冒号:表示 增加特殊效果或选择第几个*/
+        /* 链接伪类选择器 选择所有 未被访问的链接 已被访问的链接 鼠标指针位于其上的链接 活动链接（鼠标按下未弹起）一般只写a和a:hover*/
+        /*
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
+            color: blue;
+        } 
+        */
+
+        input:focus {
+            /* focus伪类选择器 用于选取获得焦点（点击后的光标）的表单元素*/
+            background-color: yellow;
+        }
+
+        .rowToBlock {
+            width: 400px;
+            height: 100px;
+            background-color: gray;
+            /* 把 行内元素a 转化为 块级元素 */
+            display: block;
+        }
+
+        .blockToRow {
+            /* width: 300px;
+            height: 100px; */
+            background-color: plum;
+            /* 把 块级元素div 转化为 行内元素 */
+            display: inline;
+            /* inline-block行内快元素 */
+        }
+
+        .liebiao a {
+            display: block;
+            width: 230px;
+            height: 40px;
+            background-color: #55585a;
+            font-size: 14px;
+            color: #FFFFFF;
+            text-decoration: none;
+            text-indent: 2em;
+            /* 设置文本行高等于盒子行高，相当于垂直居中 */
+            line-height: 40px;
+        }
+
+        .liebiao a:hover {
+            background-color: #ff6700;
+        }
+
+        .background {
+            width: 300px;
+            height: 300px;
+            /* 设置半透明效果，最后一个参数alpha设置，最高为1不透明 */
+            background-color: rgba(0, 0, 0, .3);
+            /* 设置背景图片 */
+            background-image: url(images/logo.png);
+            /* 默认平铺repeat no-repeat设置不平铺 repeat-x是沿x平铺 repeat-y是沿y平铺 */
+            background-repeat: no-repeat;
+            /* 设置背景图片的位置 background-position: x y; xy设置方位名词的话顺序无关 精确设置必定先x后y 省略一个参数则默认居中*/
+            background-position: 20px 40px;
+        }
+
+        .h3 {
+            width: 118px;
+            height: 40px;
+            /* background-color: yellow; */
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 40px;
+            background-image: url(images/icon.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            text-indent: 1.5em;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            background-image: url(images/bg.jpg);
+            background-repeat: no-repeat;
+            background-position: center top;
+            /* 背景固定 fixed固定 默认scroll滚动 */
+            background-attachment: fixed;
+            /* background复合写法 没有顺序要求 */
+            /* background: yellow url(images/bg.jpg) no-repeat fixed center top; */
+        }
+
+        .nav a {
+            display: inline-block;
+            width: 128px;
+            height: 58px;
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0);
+            text-align: center;
+            line-height: 48px;
+            color: #FFFFFF;
+        }
+
+        .nav .bg1 {
+            background-image: url(images/bg1.png);
+        }
+
+        .nav .bg1:hover {
+            background-image: url(images/bg11.png);
+        }
+
+        .nav .bg2 {
+            background-image: url(images/bg2.png);
+        }
+
+        .nav .bg2:hover {
+            background-image: url(images/bg22.png);
+        }
+
+        .nav .bg3 {
+            background-image: url(images/bg3.png);
+        }
+
+        .nav .bg3:hover {
+            background-image: url(images/bg11.png);
+        }
+
+        .nav .bg4 {
+            background-image: url(images/bg4.png);
+        }
+
+        .nav .bg4:hover {
+            background-image: url(images/bg22.png);
+        }
+
+        .nav .bg5 {
+            background-image: url(images/bg5.png);
+        }
+
+        .nav .bg5:hover {
+            background-image: url(images/bg11.png);
+        }
+
+        /* 
+        CSS三大特性
+        层叠性：（样式冲突时离哪个样式近就用哪个） 
+        继承性 ：（子元素继承上一元素的样式）
+        优先级 ：继承和*<元素选择器<类和伪类选择器<ID选择<行内样式<!important
+        */
+
+        /* 盒子：content padding border margin */
+        #box {
+            width: 300px;
+            height: 200px;
+            /* border-width 边框粗细 一般情况下用px */
+            /* border-width: 15px; */
+            /* border-style 边框样式 solid实线边框 dashed虚线边框 dotted点线边框*/
+            /* border-style: solid; */
+            /* border-color: blue; */
+            /* border复合写法 */
+            border: 1px solid blue;
+            /* border-top: 上边框写法，其余同理 */
+            /* border-collapse:collapse; 合并相邻的边框，常用于table中 */
+            /* border会改变盒子的大小 */
+
+            /* padding 内边框大小 1个值代表四方，2个分别代表上下和左右，3个上和左右和下，4个上右下左 可用padding-top等单独设置 */
+            padding: 20px;
+            /* padding会改变盒子的大小 */
+            /* 可用于撑开盒子，保持文字间距离相等 但当width没有指定时候则不影响*/
+
+            /* margin 外边距大小 控制盒子与盒子之间的间距 简写与padding一样*/
+            /* auto 水平居中 */
+            margin: 0 auto;
+
+        }
+
+        .nav2 {
+            height: 41px;
+            border-top: 3px solid #ff8500;
+            border-bottom: 1px solid #edee00;
+            background-color: #fcfcfc;
+            line-height: 41px;
+        }
+
+        .nav2 a {
+            display: inline-block;
+            height: 41px;
+            font-size: 12px;
+            color: #4c4c4c;
+            text-decoration: none;
+            /* padding撑开盒子 */
+            padding: 0 20px;
+        }
+
+        .nav2 a:hover {
+            background-color: #eee;
+            color: #ff8500;
+        }
+
+        /* 清除很多元素自带的内外边距 */
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+
+        .box {
+            width: 298px;
+            height: 415px;
+            background: #FFFFFF;
+            margin: 20px auto;
+        }
+
+        .box img {
+            /* 图片过大 设置与上一级元素一样宽 */
+            width: 100%;
+        }
+
+        .review {
+            height: 70px;
+            color: #000000;
+            font: normal 400 14px "Microsoft YaHei";
+            padding: 0 28px;
+            margin-top: 30px;
+            text-decoration: none;
+            text-align: left;
+        }
+
+        .appraise {
+            font-size: 12px;
+            color: #b0b0b0;
+            margin-top: 20px;
+            padding: 0 28px;
+        }
+
+        .info {
+            font-size: 14px;
+            padding: 0 28px;
+        }
+
+        .info h4 {
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: 400;
+        }
+
+        .info h4 a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .info span {
+            color: #ff6700;
+        }
+
+        .info em {
+            font-style: normal;
+            color: #ebe4e0;
+            margin: 0 6px 0 15px;
+        }
+
+        .box2 {
+            width: 248px;
+            height: 163px;
+            border: 1px solid #fcfcfc;
+            margin: 20px auto;
+            background: white;
+        }
+
+        .box2 h3 {
+            height: 32px;
+            border-bottom: 1px dotted gray;
+            font: normal 400 14px/32px "Microsoft YaHei";
+            padding: 0 10px;
+        }
+
+        .box2 ul li a {
+            font-size: 12px;
+            color: #666666;
+            text-decoration: none;
+        }
+
+        .box2 ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .box2 ul li {
+            /* 去掉li前面的圆点 */
+            list-style: none;
+            height: 23px;
+            line-height: 23px;
+        }
+
+        .box2 ul {
+            margin: 7px 20px;
+        }
+
+        /* border-radius: length; 圆角边框 length设置为正方形高度的一半即为圆形（可写为50%）可以设置不同的圆角设置4个按顺序左上右上右下左下 */
+        /* box-shadow 为盒子添加阴影 不占空间 */
+        .box3 {
+            height: 100px;
+            width: 300px;
+            border: 1px solid black;
+            background: white;
+            margin: 20px auto;
+            border-radius: 20px;
+        }
+
+        .box3:hover {
+            /* h-shadow水平阴影位置（正值往右负值往左） v-shadow垂直阴影（正往下负往上） blue模糊距离 spread阴影尺寸 color阴影颜色 inset变为内阴影*/
+            box-shadow: 10px 10px 10px 10px rgba(255, 255, 255, .3);
+            /* 前两个必选 */
+        }
+
+        /* text-shadow文字阴影 有h-shadow v-shadow blue color四个值 */
+        #textShadow {
+            font-size: 50px;
+            color: orangered;
+            font-weight: 700;
+            text-shadow: 5px 5px 5px rgba(255, 255, 255, .3);
+        }
+
+        /*
+         排列方式：
+            标准流（行内元素和块级元素默认排序） 
+            浮动（典型：让块元素在一行内显示，之间不会有缝隙，inline-block会有缝隙）
+            定位
+        */
+        /* 布局准则：1.多个块级元素纵向排列用标准流，横向排列用浮动*/
+
+        /* 浮动 float属性创建浮动框，向左或向右触及另一个块或浮动框的边缘 特性：1*.浮动脱离标准流 2.多个盒子浮动一行内显示顶端对齐 
+            3.会有行内块元素特点 4.不会压文字 浮动最初是做文字环绕的*/
+        .left {
+            float: left;
+            width: 200px;
+            height: 200px;
+            background-color: cyan;
+        }
+
+        .right {
+            float: right;
+            width: 200px;
+            height: 200px;
+            background-color: white;
+        }
+
+        /* 清除浮动 父元素没有height值的时候需要 四种方法 */
+        /* 1. 额外标签法 在最后一个浮动的子元素后添加一个额外的标签，添加清除浮动样式（不常用）*/
+        .clear {
+            clear: both;
+        }
+
+        /* 2. 父级添加 overflow属性 将其属性值设置为hidden、auto或scroll 无法显示移除的部分*/
+        /* 3. :after伪属性 双伪元素 在style里写上 
+            .clearfix:after{content:"";display:block;height:0;clear:both;visibility:hidden}
+            .clear{ *zoom:1;}  I6、I7专有 */
+
+        /* 相当于盒子后添加一个新盒子 */
+        /* 4. 双伪元素，前后都添加一个盒子 
+            .clear:before .clear:after{content:"";display:table;} 
+            .clear:after{clear:both} 
+            .clear{ *zoom:1}*/
+
+
+        /* 定位 让盒子自由的在某个盒子内移动位置或者固定屏幕中某个位置，并且可以压住其他盒子 与浮动类似也会有行内块元素特点*/
+        /* 定位 = 定位模式（position） +  边偏移（top bottom left right） */
+        /* position：
+                static默认静态定位 约等于标准流（几乎不用） 
+                relative相对定位 相对于原来的位置移动 但原来的位置继续保留 后面的元素依旧按次序排列 position: relative;
+                absolute绝对定位 没有父元素或父元素没有定位以Document为定位 不占有原来的位置
+                fixed固定定位（。浏览器滚动时 固定不动） 以可视窗口为参照 不占有原来的位置 复杂写法：先走浏览器宽度的%多少再用margin偏移 
+                sticky粘性定位 相对定位+固定定位 IE不支持 （了解）*/
+        /* 子集一般用绝对定位不占位置 父级用相对定位占有位置避免布局混乱 */
+
+        /* z-index 定位叠放次序 {z-index:1} 默认auto，可以为负数 0 整数，数值越大盒子越靠上 值相同按书写顺序后来者居上 */
+        .relative1 {
+            position: relative;
+            top: 100px;
+            left: 100px;
+            width: 200px;
+            height: 200px;
+            background-color: #ffffff;
+        }
+
+        .relative2 {
+            width: 200px;
+            height: 200px;
+            background-color: rgb(69, 43, 161);
+        }
+
+        .absolute1 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background-color: #fff;
+        }
+
+        .absolute2 {
+            position: absolute;
+            right: 0;
+            bottom: 0px;
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+
+        .fixed1 {
+            position: fixed;
+            top: 300px;
+            right: 40px;
+        }
+
+        .fixed2 {
+            position: fixed;
+            top: 450px;
+            /* 走浏览器宽度的一半 */
+            left: 50%;
+            /* margin写偏移 */
+            margin-left: 600px;
+        }
+
+        /* 隐藏元素 display:none; 隐藏后位置也没有了（常用） 搭配js常用作特效  display:block;也有显示的意思
+           隐藏元素 visibility:hidden; 隐藏元素后位置保留 visibility:visible; 元素可见 
+           隐藏元素 overflow:hidden; 溢出 对溢出框的元素进行隐藏 visible显示溢出元素 
+                    sroll 显示滚动条，无论溢不溢出 auto需要的时候添加滚动条，没超出不显示*/
+
+        /* css 精灵图（sprites） 主要针对背景图，把多个小背景图片整合到一张大图片中 移动背景图片位置background-position 基本是负值
+            缺点：图片较大 失真 更换麻烦*/
+        span {
+            display: inline-block;
+        }
+
+        .name .G {
+            width: 103px;
+            height: 116px;
+            background: url(images/abcd.jpg) no-repeat -98px -140px;
+        }
+
+        .name .U {
+            width: 114px;
+            height: 112px;
+            background: url(images/abcd.jpg) no-repeat -475px -421px;
+        }
+
+        .name .O {
+            width: 110px;
+            height: 115px;
+            background: url(images/abcd.jpg) no-repeat -370px -273px;
+        }
+
+        .name .Z {
+            width: 116px;
+            height: 109px;
+            background: url(images/abcd.jpg) no-repeat -477px -559px;
+        }
+
+        .name .H {
+            width: 107px;
+            height: 110px;
+            background: url(images/abcd.jpg) no-repeat -217px -141px;
+        }
+
+        .name .A {
+            width: 107px;
+            height: 114px;
+            background: url(images/abcd.jpg) no-repeat 0 0;
+        }
+
+        /* iconfont字体图标 看上去是图标，本质是字体
+            修改url指向文件*/
+        .icon-shiyongwendang {
+            height: 400px;
+            width: 400px;
+        }
+
+        @font-face {
+            font-family: 'iconfont';
+            src: url('iconfont/iconfont.eot');
+            src: url('iconfont/iconfont.eot?#iefix') format('embedded-opentype'),
+                url('iconfont/iconfont.woff2') format('woff2'),
+                url('iconfont/iconfont.woff') format('woff'),
+                url('iconfont/iconfont.ttf') format('truetype'),
+                url('iconfont/iconfont.svg#iconfont') format('svg');
+        }
+
+        .iconfont {
+            font-family: "iconfont" !important;
+            font-size: 50px;
+        }
+
+        /* css三角 */
+        .triple_ex {
+            width: 0;
+            height: 0;
+            border-top: 50px solid red;
+            border-bottom: 50px solid green;
+            border-left: 50px solid yellow;
+            border-right: 50px solid blue;
+        }
+
+        .triple {
+            width: 0;
+            height: 0;
+            border: 50px solid transparent;
+            border-top-color: red;
+        }
+
+        /* cursor:pointer; 鼠标样式 default默认小白 pointer小手 move移动 text文本 not-allowed禁止 */
+
+        /* outline 轮廓线  outline:0或none可去掉输入框点击后默认出现的蓝色边框 */
+        input,
+        textarea {
+            outline: none;
+        }
+
+        /* resize 可防止拖曳文本域(textarea) */
+        textarea {
+            resize: none;
+        }
+
+        /* vertical-align 使图片、表单和文字对齐，对行内快元素使用设置为middle  baseline默认基线对齐 top顶线 middle中线 bottom底线 
+            图片底下默认有空白缝隙（因为默认基线对齐） 可用vertical-align:middle top或bottom对齐 或者 转换为块级元素*/
+
+        /* 溢出的文字用省略号代替 三个条件：1.强制一行显示文本white-space:nowrap; 2.超出部分隐藏 overflow:hidden; 
+            3.文字用省略号替代超出的部分 text-overflow:ellipsis; */
+        .nowrap {
+            width: 150px;
+            height: 80px;
+            background-color: #fff;
+            margin: 100px auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* 多行文本溢出显示省略号 兼容性问题严重 五个条件：1.overflow:hidden; 2.text-overflow:ellipsis; 
+            3.弹性伸缩盒子模型显示display:-webkit-box; 4.限制在一个块元素内显示的文本的行数:-webkit-line-clamp:2;
+            5.设置或检索伸缩盒对象的子元素的排列方式-webkit-box-orient:vertical;*/
+
+        /* css初始化 重设浏览器样式（为了兼容不同浏览器的默认值） */
+    </style>
+</head>
+
+<body>
+    <h1>青春不常在</h1><br />
+    <form action="X.php" method="GET">
+        <table width="600" border="1">
+            <tr>
+                <td>性别:</td>
+                <td><input type="radio" name="sex" id="sex_male" /><label for="sex_male"><img
+                            src="images/man.jpg">男</label>
+                    <input type="radio" name="sex" id="sex_female" /><label for="sex_female"><img
+                            src="images/women.jpg">女</label></td>
+            </tr>
+            <tr>
+                <td>生日：</td>
+                <td>
+                    <select name="birthday_year">
+                        <option>-请选择年-</option>
+                        <option selected="selected">1997</option>
+                        <option>1998</option>
+                        <option>1999</option>
+                        <option>2000</option>
+                    </select>
+                    <select name="birthday_mouth">
+                        <option>-请选择月-</option>
+                        <option>1</option>
+                        <option selected="selected">3</option>
+                        <option>4</option>
+                    </select>
+                    <select name="birthday_day">
+                        <option>-请选择日-</option>
+                        <option>1</option>
+                        <option>3</option>
+                        <option selected="selected">4</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>所在地区：</td>
+                <td><input type="text" name="place" value="广州"></td>
+            </tr>
+            <tr>
+                <td>婚姻状况：</td>
+                <td>
+                    <input type="radio" name="marriage" value="未婚" checked="checked">未婚<input type="radio"
+                        name="marriage" value="已婚">已婚<input type="radio" name="marriage" value="离婚">离婚
+                </td>
+            </tr>
+            <tr>
+                <td>上传头像：</td>
+                <td><input type="file" name="photo" /></td>
+            </tr>
+            <tr>
+                <td>学历：</td>
+                <td><input type="text" value="研究生" name="education"></td>
+            </tr>
+            <tr>
+                <td>喜欢的类型：</td>
+                <td>
+                    <input type="checkbox" name="love" value="妩媚的">妩媚的
+                    <input type="checkbox" name="love" value="可爱的">可爱的
+                    <input type="checkbox" name="love" checked="checked" value="全都要">全都要
+                </td>
+            </tr>
+            <tr>
+                <td>自我介绍：</td>
+                <td><textarea name="profile" cols="30" rows="5">个人简介</textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="免费提交"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="checkbox" name="agree">我同意注册条款和会员加入标准</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="#">我是会员，立刻加入</a></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h4>我承诺</h4>
+                    <ul class="ul">
+                        <li>
+                            <p>--年满18岁，单身--</p>
+                        </li>
+                        <li>--抱着严肃的态度--</li>
+                        <li>--真诚寻找另一半--</li>
+                    </ul>
+                    <ol>
+                        <li class="red">css类选择器</li>
+                        <li>dsa</li>
+                    </ol>
+                    <dl class="dl">
+                        <dt>asd</dt>
+                        <dd>asd</dd>
+                        <dd>asd</dd>
+                    </dl>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <div class="color font35">同时引用两个类的css，可用于拆分公共样式</div>
+    <div id="pink">id选择器，只能用一次，经常与javascript搭配</div>
+
+    <div class="bingji">
+        <div>并集选择器</div>
+        <span>并集选择器</span>
+    </div>
+
+    <a href="#sex_male" class="rowToBlock">行内元素a转换为块级元素，点击后跳转到id为sex_male的元素的位置</a>
+    <div class="blockToRow">把块级元素div转换为行内元素</div><br>
+    <div class="liebiao">
+        <a href="#">手机 电话卡</a>
+        <a href="#">电视 盒子</a>
+        <a href="#">笔记本 平板</a>
+        <a href="#">出行穿戴</a>
+        <a href="#">智能路由器</a>
+        <a href="#">健康 儿童</a>
+        <a href="#">耳机 音响</a><br>
+    </div>
+    <div class="background"></div>
+    <h3 class="h3">成长守护平台</h3>
+    <div class="nav">
+        <a href="#" class="bg1">五彩导航</a>
+        <a href="#" class="bg2">五彩导航</a>
+        <a href="#" class="bg3">五彩导航</a>
+        <a href="#" class="bg4">五彩导航</a>
+        <a href="#" class="bg5">五彩导航</a>
+    </div>
+    <div id="box">
+        盒子的content、padding、border、margin
+    </div>
+    <div class="nav2">
+        <a href="#">新浪导航</a>
+        <a href="#">手机新浪网</a>
+        <a href="#">移动客户端</a>
+        <a href="#">微博</a>
+        <a href="#">新浪网</a>
+    </div>
+    <div class="box">
+        <img src="images/img.jpg" alt="">
+        <p class="review">快递牛，整体不错，蓝牙可以说是秒连。红米给力</p>
+        <div class="appraise">来自于 1892373的评价</div>
+        <div class="info">
+            <h4><a href="#">Redmi AirDots真无线蓝...</a></h4> <em>|</em>
+            <span> 99.9元</span>
+        </div>
+    </div>
+
+    <div class="box2">
+        <h3>品优购快报</h3>
+        <ul>
+            <li><a href="#">【特惠】爆款耳机5折秒！</a></li>
+            <li><a href="#">【特惠】母亲节，健康好礼低至5折！</a></li>
+            <li><a href="#">【特惠】爆款耳机5折秒！</a></li>
+            <li><a href="#">【特惠】9.9元洗100张照片！</a></li>
+            <li><a href="#">【特惠】长虹智能空调立省1000</a></li>
+        </ul>
+    </div>
+    <div class="box3"></div>
+
+    <p id="textShadow">文字阴影</p>
+    <div style="background-color:gray;">
+        <div class="left">左边float</div>
+        <div class="right">右边float</div>
+        <div class="clear"></div>
+    </div>
+
+    <div style="background-color: white; height:20px;">这是一行div</div>
+
+    <div class="relative1">relative1 偏移 保留原来的位置</div>
+    <div class="relative2"><br><br>
+        <br><br>
+        <br><br>relative2 上面的盒子动了但保留原来的位置
+    </div>
+    <div class="absolute1">绝对定位 top:0; right:0;没有父元素或父元素没有定位以Document为定位，不占有原来位置
+        <div class="absolute2">有定位的父元素内部的绝对定位，以其为参考点</div>
+    </div>
+    <div class="fixed1">
+        <img src="images/pvp.png" alt="">
+    </div>
+    <div class="fixed2">
+        <img src="images/pvp.png" alt="">
+    </div>
+    <div class="name">
+        <span class="G"></span>
+        <span class="U"></span>
+        <span class="O"></span>
+        <span class="Z"></span>
+        <span class="H"></span>
+        <span class="A"></span>
+        <span class="O"></span>
+    </div>
+    <div>
+        <span class="iconfont">&#xeb65;</span>
+        <span class="iconfont">&#xeb66;</span>
+        <span style="color:green">&lt;字体图标</span>
+    </div>
+    <div class="triple_ex"></div><br>css三角的做法
+    <div class="triple"></div>
+
+    <div>
+        <ul>
+            <li style="cursor: default;">默认的小白鼠标样式</li>
+            <li style="cursor:pointer">小手鼠标样式</li>
+            <li style="cursor:move">移动鼠标样式</li>
+            <li style="cursor:text">文本鼠标样式</li>
+            <li style="cursor:not-allowed">禁止鼠标样式</li>
+        </ul>
+    </div>
+
+    <div class="nowrap">溢出的文字用省略号代替
+    </div>
+</body>
+
+</html>
